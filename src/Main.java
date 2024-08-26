@@ -25,9 +25,14 @@ public class Main {
 
         // GENERATE RANDOM BOARD
         Board board = new Board();
+        System.out.println("Goal Configuration of the Board:");
         board.printBoard();
+
         board.generateRandomBoard(50);
+        System.out.println("Random Initial Configuration of the board:");
         board.printBoard();
+
+        
 
         // RESOLVE BOARD WITH THE SELECTED ALGORITHM
         /* int opc = Integer.parseInt(args[0]);
