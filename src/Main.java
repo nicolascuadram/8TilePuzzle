@@ -24,16 +24,20 @@ public class Main {
         }
 
         // GENERATE RANDOM BOARD
+        Board board = new Board();
+        board.printBoard();
+        board.generateRandomBoard(50);
+        board.printBoard();
 
         // RESOLVE BOARD WITH THE SELECTED ALGORITHM
-        int opc = Integer.parseInt(args[0]);
+        /* int opc = Integer.parseInt(args[0]);
 
         if (opc == 1){
 
         }
         else {
 
-        }
+        } */
 
     }
 
