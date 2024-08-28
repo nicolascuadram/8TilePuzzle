@@ -47,6 +47,7 @@ public class Main {
             if (search.solveWithBFS(board)){
                 System.out.println("The Puzzle was resolved with BFS:");
                 board.printBoard();
+                System.out.println("Number of nodes in memory for the queue: " + search.getQueueCount());
                 System.out.println("Number of nodes checked: " + search.getVisitedCount());
             }
             else {
@@ -57,6 +58,7 @@ public class Main {
             if (search.solveWithDFS(board)){
                 System.out.println("The Puzzle was resolved with DFS:");
                 board.printBoard();
+                System.out.println("Number of nodes in memory for the stack: " + search.getStackCount());
                 System.out.println("Number of nodes checked: " + search.getVisitedCount());
             }
             else {
@@ -67,6 +69,7 @@ public class Main {
             if (search.solveWithBFS(board)){
                 System.out.println("The Puzzle was resolved with BFS:");
                 board.printBoard();
+                System.out.println("Number of nodes in memory for the queue: " + search.getQueueCount());
                 System.out.println("Number of nodes checked: " + search.getVisitedCount());
                 System.out.println();
             }
@@ -76,6 +79,7 @@ public class Main {
             if (search.solveWithDFS(board)){
                 System.out.println("The Puzzle was resolved with DFS:");
                 board.printBoard();
+                System.out.println("Number of nodes in memory for the stack: " + search.getStackCount());
                 System.out.println("Number of nodes checked: " + search.getVisitedCount());
             }
             else {

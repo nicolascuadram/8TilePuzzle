@@ -11,7 +11,10 @@ public class Searches {
 
     // In this set we'll add each board configuration that we have already checked.
     private Set<String> visited = new HashSet<>();
+    // Here we save the initial board configuration.
     private int[][] randomBoard;
+    private int queueCount = 0;
+    private int stackCount = 0;
 
     public boolean solveWithBFS (Board board) {
 
@@ -36,6 +39,8 @@ public class Searches {
             
             // Checking if we got the goal.
             if (board.isGoal()) {
+                this.queueCount = queue.size();
+                queue.clear();
                 return true;
             }
 
@@ -84,6 +89,8 @@ public class Searches {
 
             // Checking if we got the goal.
             if (board.isGoal()) {
+                this.stackCount = stack.size();
+                stack.clear();
                 return true;
             }
 
@@ -164,6 +171,16 @@ public class Searches {
     // Number of checked board configurations.
     public int getVisitedCount() {
         return this.visited.size();
+    }
+
+    // Number of nodes in memory for queue.
+    public int getQueueCount() {
+        return this.queueCount;
+    }
+
+    // Number of nodes in memory for stack.
+    public int getStackCount() {
+        return this.stackCount;
     }
 
 }
