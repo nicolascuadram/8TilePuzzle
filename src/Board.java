@@ -9,18 +9,18 @@ public class Board {
     }
 
     // METHODS
-    public void generateRandomBoard(int moves){
+    public void generateRandomBoard(int moves) {
 
         // We will generate a random board with a number of random moves from the goal configuration.
-        while (moves != 0){
+        while (moves != 0) {
 
             // We will get the empty position and the near positions of the empty position in the board.
             int emptyPosition[] = getEmptyPosition();
             int nearPositions[][] = getNearPositions(emptyPosition);
 
+            // Some short names for variables.
             int row = emptyPosition[0];
             int col = emptyPosition[1];
-
             int upRow = nearPositions[0][0];
             int upCol = nearPositions[0][1];
             int downRow = nearPositions[1][0];
@@ -31,10 +31,10 @@ public class Board {
             int rightCol = nearPositions[3][1];
 
             /*
-            In this cicle we try to get a random number to move one position in the board.
-            The cicle will continue until we get a random number and a valid direction to move.
+            In this cycle we try to get a random number to move one position in the board.
+            The cycle will continue until we get a random number and a valid direction to move.
             */
-            while (true){
+            while (true) {
 
                 // We will get a random number between 0 and 3 to move the empty position to a near position.
                 int random = (int) (Math.random() * 4);
@@ -163,6 +163,7 @@ public class Board {
         return nearPositions;
     }
 
+    // Function to check if the board has a goal configuration.
     public boolean isGoal() {
         // Goal Configuration
         int goal[][] = {{1, 2, 3}, {4, 0, 5}, {6, 7, 8}};
@@ -178,6 +179,7 @@ public class Board {
         return true;
     }
 
+    // Function to print the board in the console.
     public void printBoard() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -191,6 +193,11 @@ public class Board {
             System.out.println();
         }
         System.out.println();
+    }
+
+    // SETTER
+    public void setBoard(int[][] newBoard) {
+        this.board = newBoard;
     }
 
     // GETTER

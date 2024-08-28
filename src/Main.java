@@ -35,14 +35,21 @@ public class Main {
         
 
         // RESOLVE BOARD WITH THE SELECTED ALGORITHM
-        /* int opc = Integer.parseInt(args[0]);
+        int opc = Integer.parseInt(args[0]);
+        Searches search = new Searches();
 
-        if (opc == 1){
-
+        if (opc == 1) {
+            if (search.solveWithBFS(board)){
+                System.out.println("The Puzzle was resolved with BFS:");
+                board.printBoard();
+            }
+            else {
+                System.out.println("The Puzzle can't be resolved with BFS.");
+            }
         }
         else {
 
-        } */
+        }
 
     }
 
