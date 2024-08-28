@@ -48,8 +48,15 @@ public class Main {
                 System.out.println("The Puzzle can't be resolved with BFS.");
             }
         }
-        else {
-
+        else if (opc == 2) {
+            if (search.solveWithDFS(board)){
+                System.out.println("The Puzzle was resolved with DFS:");
+                board.printBoard();
+                System.out.println("Number of nodes checked: " + search.getVisitedCount());
+            }
+            else {
+                System.out.println("The Puzzle can't be resolved with DFS.");
+            }
         }
 
     }

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Queue;
 import java.util.Set;
+import java.util.Stack;
 
 public class Searches {
 
@@ -36,7 +37,7 @@ public class Searches {
             // We get a list of matrices that can represent posible movements from the actual board.
             List<int[][]> neighbors = getNeighbors(board);
 
-            // We'll add each neighbor to queue and visited set.
+            // We'll add each neighbor to the queue and visited set.
             for (int[][] neighbor : neighbors) {
 
                 // Matrix to String
@@ -52,6 +53,45 @@ public class Searches {
         }
 
         // If we don't get the goal configuration we'll return false.
+        return false;
+    }
+
+    public boolean solveWithDFS(Board board) {
+        // In the stack we'll add all the posible board configurations in each movement.
+        Stack<int[][]> stack = new Stack<>();
+
+        // Add the initial board configuration to the stack and the set.
+        stack.push(board.getBoard());
+        this.visited.add(Arrays.deepToString(board.getBoard()));
+
+        while (!stack.isEmpty()) {
+
+            // Set the actual board from the stack.
+            board.setBoard(stack.pop());
+
+            // Checking if we got the goal.
+            if (board.isGoal()) {
+                return true;
+            }
+
+            // We get a list of matrices that can represent posible movements from the actual board.
+            List<int[][]> neighbors = getNeighbors(board);
+            
+            // We'll add each neighbor to the stack and visited set.
+            for (int[][] neighbor : neighbors) {
+
+                // Matrix to String
+                String neighborString = Arrays.deepToString(neighbor);
+
+                // We'll not add board configurations that we have already visited.
+                if (!this.visited.contains(neighborString)) {
+                    stack.push(neighbor);
+                    this.visited.add(neighborString);
+                }
+            }
+
+        }
+        
         return false;
     }
 
@@ -87,7 +127,7 @@ public class Searches {
 
     }
 
-    private int[][] swap(int[][] board, int row1, int col1, int row2, int col2) {
+    private int[][] swap(int[][] board, int row, int col, int newRow, int newCol) {
 
         // We generate a copy from the board.
         int[][] newBoard = new int[3][3];
@@ -96,9 +136,9 @@ public class Searches {
         }
 
         // Then we swap the given positions (empty position and movement position).
-        int aux = newBoard[row1][col1];
-        newBoard[row1][col1] = newBoard[row2][col2];
-        newBoard[row2][col2] = aux;
+        int aux = newBoard[row][col];
+        newBoard[row][col] = newBoard[newRow][newCol];
+        newBoard[newRow][newCol] = aux;
 
         return newBoard;
     }
