@@ -42,6 +42,7 @@ public class Main {
         Searches search = new Searches();
         search.setRandomBoard(board.getBoard());
 
+        // Outputs
         if (opc == 1) {
             if (search.solveWithBFS(board)){
                 System.out.println("The Puzzle was resolved with BFS:");
