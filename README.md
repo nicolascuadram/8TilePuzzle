@@ -32,5 +32,5 @@ Where:
 For example, an execution for both algorithms will be:
 
 ```bash
-java Main 1
+java Main 3
 ```
