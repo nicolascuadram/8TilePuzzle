@@ -8,16 +8,16 @@ import java.util.Set;
 
 public class Searches {
 
+    // In this set we'll add each board configuration that we have already checked.
+    private Set<String> visited = new HashSet<>();
+
     public boolean solveWithBFS (Board board) {
         // In the queue we'll add all the posible board configurations in each movement.
         Queue<int[][]> queue = new ArrayDeque<>();
 
-        // In this set we'll add each board configuration that we have already checked.
-        Set<String> visited = new HashSet<>();
-
         // Add the initial board configuration to the queue and the set.
         queue.add(board.getBoard());
-        visited.add(Arrays.deepToString(board.getBoard())); // Matrix to String
+        this.visited.add(Arrays.deepToString(board.getBoard())); // Matrix to String
 
         /*
         In each iteration of this cycle we'll check if the actual configuration is the goal.
@@ -43,9 +43,9 @@ public class Searches {
                 String neighborString = Arrays.deepToString(neighbor);
 
                 // We'll not add board configurations that we have already visited.
-                if (!visited.contains(neighborString)) {
+                if (!this.visited.contains(neighborString)) {
                     queue.add(neighbor);
-                    visited.add(neighborString);
+                    this.visited.add(neighborString);
                 }
             }
 
@@ -101,6 +101,11 @@ public class Searches {
         newBoard[row2][col2] = aux;
 
         return newBoard;
+    }
+
+    // Number of checked board configurations.
+    public int getVisitedCount() {
+        return this.visited.size();
     }
 
 }
