@@ -14,8 +14,11 @@ public class Main {
             int arg = Integer.parseInt(args[0]);
 
             // If the argument is not 1 or 2, print an error and exit the program.
-            if (arg < 1 || arg > 2) {
-                System.err.println("The argument must be 1 or 2");
+            if (arg < 1 || arg > 3) {
+                System.err.println("The argument must be 1, 2, or 3");
+                System.err.println("1: Solve with BFS");
+                System.err.println("2: Solve with DFS");
+                System.err.println("3: Solve with both");
                 System.exit(0);
             }
         } catch (NumberFormatException e) {
@@ -24,19 +27,20 @@ public class Main {
         }
 
         // GENERATE RANDOM BOARD
+        // Creating a initial board with goal configuration and printing in the console.
         Board board = new Board();
         System.out.println("Goal Configuration of the Board:");
         board.printBoard();
 
+        // Generating a random board with 50 movements and printing in the console.
         board.generateRandomBoard(50);
         System.out.println("Random Initial Configuration of the board:");
         board.printBoard();
 
-        
-
         // RESOLVE BOARD WITH THE SELECTED ALGORITHM
         int opc = Integer.parseInt(args[0]);
         Searches search = new Searches();
+        search.setRandomBoard(board.getBoard());
 
         if (opc == 1) {
             if (search.solveWithBFS(board)){
@@ -49,6 +53,25 @@ public class Main {
             }
         }
         else if (opc == 2) {
+            if (search.solveWithDFS(board)){
+                System.out.println("The Puzzle was resolved with DFS:");
+                board.printBoard();
+                System.out.println("Number of nodes checked: " + search.getVisitedCount());
+            }
+            else {
+                System.out.println("The Puzzle can't be resolved with DFS.");
+            }
+        }
+        else {
+            if (search.solveWithBFS(board)){
+                System.out.println("The Puzzle was resolved with BFS:");
+                board.printBoard();
+                System.out.println("Number of nodes checked: " + search.getVisitedCount());
+                System.out.println();
+            }
+            else {
+                System.out.println("The Puzzle can't be resolved with BFS.");
+            }
             if (search.solveWithDFS(board)){
                 System.out.println("The Puzzle was resolved with DFS:");
                 board.printBoard();

@@ -11,14 +11,19 @@ public class Searches {
 
     // In this set we'll add each board configuration that we have already checked.
     private Set<String> visited = new HashSet<>();
+    private int[][] randomBoard;
 
     public boolean solveWithBFS (Board board) {
+
+        // Making sure that the set is empty.
+        this.visited.clear();
+
         // In the queue we'll add all the posible board configurations in each movement.
         Queue<int[][]> queue = new ArrayDeque<>();
 
         // Add the initial board configuration to the queue and the set.
-        queue.add(board.getBoard());
-        this.visited.add(Arrays.deepToString(board.getBoard())); // Matrix to String
+        queue.add(randomBoard);
+        this.visited.add(Arrays.deepToString(randomBoard)); // Matrix to String
 
         /*
         In each iteration of this cycle we'll check if the actual configuration is the goal.
@@ -57,13 +62,21 @@ public class Searches {
     }
 
     public boolean solveWithDFS(Board board) {
+
+        // Making sure that the set is empty.
+        this.visited.clear();
+
         // In the stack we'll add all the posible board configurations in each movement.
         Stack<int[][]> stack = new Stack<>();
 
         // Add the initial board configuration to the stack and the set.
-        stack.push(board.getBoard());
-        this.visited.add(Arrays.deepToString(board.getBoard()));
+        stack.push(randomBoard);
+        this.visited.add(Arrays.deepToString(randomBoard));
 
+        /*
+        In each iteration of this cycle we'll check if the actual configuration is the goal.
+        While we don't get the goal we'll search for more configurations to add in the stack.
+        */
         while (!stack.isEmpty()) {
 
             // Set the actual board from the stack.
@@ -92,6 +105,7 @@ public class Searches {
 
         }
         
+        // If we don't get the goal configuration we'll return false.
         return false;
     }
 
@@ -141,6 +155,10 @@ public class Searches {
         newBoard[newRow][newCol] = aux;
 
         return newBoard;
+    }
+
+    public void setRandomBoard(int[][] board) {
+        this.randomBoard = board;
     }
 
     // Number of checked board configurations.
