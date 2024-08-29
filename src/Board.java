@@ -1,4 +1,5 @@
 public class Board {
+
     // ATTRIBUTES
     private int board[][];
 

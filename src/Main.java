@@ -27,59 +27,38 @@ public class Main {
         }
 
         // GENERATE RANDOM BOARD
-        // Creating a initial board with goal configuration and printing in the console.
+        // Creating a initial board with goal configuration.
         Board board = new Board();
-        System.out.println("Goal Configuration of the Board:");
-        board.printBoard();
 
         // Generating a random board with 50 movements and printing in the console.
         board.generateRandomBoard(50);
+        System.out.println("");
         System.out.println("Random Initial Configuration of the board:");
         board.printBoard();
 
         // RESOLVE BOARD WITH THE SELECTED ALGORITHM
         int opc = Integer.parseInt(args[0]);
-        Searches search = new Searches();
-        search.setRandomBoard(board.getBoard());
+        Searches search = new Searches(board.getBoard());
 
-        // Outputs
-        if (opc == 1) {
+        if (opc == 1 || opc == 3) {
             if (search.solveWithBFS(board)){
                 System.out.println("The Puzzle was resolved with BFS:");
                 board.printBoard();
-                System.out.println("Number of nodes in memory for the queue: " + search.getQueueCount());
+                System.out.println("Time to solve the puzzle: " + (search.getTimeUsed() / 1_000_000) + " ms");
+                System.out.println("Number of nodes in memory for the queue: " + search.getMemoryCount());
                 System.out.println("Number of nodes checked: " + search.getVisitedCount());
+                System.out.println("");
             }
             else {
                 System.out.println("The Puzzle can't be resolved with BFS.");
             }
         }
-        else if (opc == 2) {
+        if (opc == 2 || opc == 3) {
             if (search.solveWithDFS(board)){
                 System.out.println("The Puzzle was resolved with DFS:");
                 board.printBoard();
-                System.out.println("Number of nodes in memory for the stack: " + search.getStackCount());
-                System.out.println("Number of nodes checked: " + search.getVisitedCount());
-            }
-            else {
-                System.out.println("The Puzzle can't be resolved with DFS.");
-            }
-        }
-        else {
-            if (search.solveWithBFS(board)){
-                System.out.println("The Puzzle was resolved with BFS:");
-                board.printBoard();
-                System.out.println("Number of nodes in memory for the queue: " + search.getQueueCount());
-                System.out.println("Number of nodes checked: " + search.getVisitedCount());
-                System.out.println();
-            }
-            else {
-                System.out.println("The Puzzle can't be resolved with BFS.");
-            }
-            if (search.solveWithDFS(board)){
-                System.out.println("The Puzzle was resolved with DFS:");
-                board.printBoard();
-                System.out.println("Number of nodes in memory for the stack: " + search.getStackCount());
+                System.out.println("Time to solve the puzzle: " + (search.getTimeUsed() / 1_000_000) + " ms");
+                System.out.println("Number of nodes in memory for the stack: " + search.getMemoryCount());
                 System.out.println("Number of nodes checked: " + search.getVisitedCount());
             }
             else {

@@ -9,14 +9,32 @@ import java.util.Stack;
 
 public class Searches {
 
+    // ATTRIBUTES
     // In this set we'll add each board configuration that we have already checked.
-    private Set<String> visited = new HashSet<>();
-    // Here we save the initial board configuration.
-    private int[][] randomBoard;
-    private int queueCount = 0;
-    private int stackCount = 0;
+    private Set<String> visited;
 
+    // Here we save the initial board configuration.
+    private int[][] initBoard;
+
+    // Counter for memory use in queue and stack.
+    private int memoryCount;
+
+    // Counter for time of execution of solvers.
+    private long timeUsed;
+
+    // CONSTRUCTOR
+    public Searches(int[][] board) {
+        this.visited = new HashSet<>();
+        this.initBoard = board;
+        this.memoryCount = 0;
+        this.timeUsed = 0;
+    }
+
+    // METHODS
     public boolean solveWithBFS (Board board) {
+
+        // Initial time.
+        long startTime = System.nanoTime();
 
         // Making sure that the set is empty.
         this.visited.clear();
@@ -25,8 +43,8 @@ public class Searches {
         Queue<int[][]> queue = new ArrayDeque<>();
 
         // Add the initial board configuration to the queue and the set.
-        queue.add(randomBoard);
-        this.visited.add(Arrays.deepToString(randomBoard)); // Matrix to String
+        queue.add(initBoard);
+        this.visited.add(Arrays.deepToString(initBoard)); // Matrix to String
 
         /*
         In each iteration of this cycle we'll check if the actual configuration is the goal.
@@ -39,8 +57,11 @@ public class Searches {
             
             // Checking if we got the goal.
             if (board.isGoal()) {
-                this.queueCount = queue.size();
+                // Saving memory use and time to solve.
+                this.memoryCount = queue.size();
                 queue.clear();
+                long endTime = System.nanoTime();
+                this.timeUsed = endTime - startTime;
                 return true;
             }
 
@@ -68,15 +89,20 @@ public class Searches {
 
     public boolean solveWithDFS(Board board) {
 
-        // Making sure that the set is empty.
+        // Initial time.
+        long startTime = System.nanoTime();
+
+        // Making sure that the set is empty and the memory use counter is 0.
         this.visited.clear();
+        this.memoryCount = 0;
+        this.timeUsed = 0;
 
         // In the stack we'll add all the posible board configurations in each movement.
         Stack<int[][]> stack = new Stack<>();
 
         // Add the initial board configuration to the stack and the set.
-        stack.push(randomBoard);
-        this.visited.add(Arrays.deepToString(randomBoard));
+        stack.push(initBoard);
+        this.visited.add(Arrays.deepToString(initBoard));
 
         /*
         In each iteration of this cycle we'll check if the actual configuration is the goal.
@@ -89,8 +115,11 @@ public class Searches {
 
             // Checking if we got the goal.
             if (board.isGoal()) {
-                this.stackCount = stack.size();
+                // Saving memory use and time to solve.
+                this.memoryCount = stack.size();
                 stack.clear();
+                long endTime = System.nanoTime();
+                this.timeUsed = endTime - startTime;
                 return true;
             }
 
@@ -145,7 +174,6 @@ public class Searches {
         }
 
         return neighbors;
-
     }
 
     private int[][] swap(int[][] board, int row, int col, int newRow, int newCol) {
@@ -164,23 +192,19 @@ public class Searches {
         return newBoard;
     }
 
-    public void setRandomBoard(int[][] board) {
-        this.randomBoard = board;
-    }
-
+    // GETTERS
     // Number of checked board configurations.
     public int getVisitedCount() {
         return this.visited.size();
     }
 
-    // Number of nodes in memory for queue.
-    public int getQueueCount() {
-        return this.queueCount;
+    // Number of nodes in memory for queue or stack.
+    public int getMemoryCount() {
+        return this.memoryCount;
     }
 
-    // Number of nodes in memory for stack.
-    public int getStackCount() {
-        return this.stackCount;
+    public long getTimeUsed() {
+        return this.timeUsed;
     }
 
 }
