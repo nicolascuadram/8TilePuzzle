@@ -36,8 +36,10 @@ public class Searches {
         // Initial time.
         long startTime = System.nanoTime();
 
-        // Making sure that the set is empty.
+        // Making sure that the set is empty and the memory use counter is 0.
         this.visited.clear();
+        this.memoryCount = 0;
+        this.timeUsed = 0;
 
         // In the queue we'll add all the posible board configurations in each movement.
         Queue<int[][]> queue = new ArrayDeque<>();
