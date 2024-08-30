@@ -4,7 +4,7 @@
 
 - Nicolás Cuadra
 
-## Requiremets
+## Requirements
 
 - Java 8 or higher
 - Java compiler (Javac)
